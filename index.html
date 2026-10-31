@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>Brickwork</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        background: #08090d;
+        color: #ddd;
+        font: 14px/1.4 system-ui, -apple-system, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      header {
+        margin-top: 10px;
+        text-align: center;
+        width: 100%;
+      }
+      h1 {
+        margin: 0;
+        font-size: 20px;
+        letter-spacing: 2px;
+        color: #00e0ff;
+        text-shadow: 0 0 10px rgba(0, 224, 255, 0.4);
+      }
+      .instructions {
+        margin: 2px 0 6px 0;
+        color: #8899aa;
+        font-size: 11px;
+      }
+      #game-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 640px;
+        touch-action: none; /* Crucial: prevent browser scrolling while swiping paddle */
+      }
+      #stage {
+        display: block;
+        width: 100%;
+        max-width: 640px;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        border: 2px solid #2a3a4d;
+        border-radius: 4px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 0 6px rgba(0, 224, 255, 0.2);
+        cursor: crosshair;
+        background: #0c0d12;
+      }
+      #controls-bar {
+        width: 100%;
+        max-width: 640px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 4px;
+        gap: 6px;
+      }
+      .mobile-buttons {
+        display: flex;
+        gap: 6px;
+      }
+      button {
+        background: #151e2b;
+        color: #00e0ff;
+        border: 1px solid #2a3d55;
+        border-radius: 4px;
+        padding: 6px 10px;
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        touch-action: manipulation;
+        transition: background 0.15s, border-color 0.15s;
+      }
+      button:active, button:hover {
+        background: #223348;
+        border-color: #00e0ff;
+      }
+      #msg {
+        font-size: 11px;
+        color: #00e0ff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      #drop {
+        margin-top: 8px;
+        width: 100%;
+        max-width: 640px;
+        border: 1px dashed #263544;
+        border-radius: 4px;
+        padding: 8px;
+        text-align: center;
+        background: #0f131a;
+        font-size: 11px;
+        color: #667788;
+      }
+      footer {
+        margin-top: auto;
+        padding: 10px;
+        font-size: 10px;
+        color: #445566;
+        text-align: center;
+        max-width: 600px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>BRICKWORK</h1>
+      <p class="instructions">Touch/drag anywhere to control paddle &bull; Tap to launch &amp; shoot</p>
+    </header>
+
+    <div id="game-container">
+      <canvas id="stage" width="640" height="480"></canvas>
+      <div id="controls-bar">
+        <span id="msg">Ready to play</span>
+        <div class="mobile-buttons">
+          <button id="btn-menu">Menu</button>
+          <button id="btn-editor">Editor</button>
+          <button id="btn-scores">Scores</button>
+          <button id="fs-btn">⛶</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="drop">
+      <span>Drop custom level packs: </span>
+      <input id="pick" type="file" style="font-size: 10px; max-width: 170px;" />
+    </div>
+
+    <footer>
+      Learning &amp; non-commercial project. Designed with built-in procedural audio and retro shaders. Not affiliated with or endorsed by the original 1996 DX-Ball author.
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
