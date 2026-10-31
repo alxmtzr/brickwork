@@ -1,0 +1,266 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="100%" height="100%">
+  <defs>
+    <radialGradient id="spot" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="45%" stop-color="#a0b0c0" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="silverBall" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#b8c4d0"/>
+      <stop offset="100%" stop-color="#2c3440"/>
+    </radialGradient>
+    <linearGradient id="goldText" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffff66"/>
+      <stop offset="50%" stop-color="#ff9900"/>
+      <stop offset="100%" stop-color="#aa4400"/>
+    </linearGradient>
+    <linearGradient id="btnActive" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#103458"/>
+      <stop offset="100%" stop-color="#06182c"/>
+    </linearGradient>
+    <linearGradient id="btnIdle" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#182230"/>
+      <stop offset="100%" stop-color="#0c121a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Black Background -->
+  <rect width="640" height="480" fill="#000000"/>
+
+  <!-- Top Status Bar -->
+  <text x="10" y="22" fill="#d8e0f0" font-family="'Courier New', monospace" font-weight="bold" font-size="13">Last Score - 18450</text>
+  <text x="630" y="22" fill="#d8e0f0" font-family="'Courier New', monospace" font-weight="bold" font-size="13" text-anchor="end">V 1.0</text>
+
+  <!-- Left & Right Spotlights -->
+  <circle cx="100" cy="75" r="56" fill="url(#spot)"/>
+  <circle cx="540" cy="75" r="56" fill="url(#spot)"/>
+
+  <!-- Cyan Framed Top Box -->
+  <rect x="100" y="35" width="440" height="80" fill="#000000" stroke="#00b8b8" stroke-width="5"/>
+  <rect x="98.5" y="33.5" width="443" height="83" fill="none" stroke="#40ffff" stroke-width="1.5"/>
+
+  <!-- Background Orbiting Cyan Dots -->
+  <g fill="#489898" opacity="0.85">
+    <circle cx="114" cy="45" r="1.2"/><circle cx="134" cy="45" r="1.2"/><circle cx="154" cy="45" r="1.2"/><circle cx="174" cy="45" r="1.2"/><circle cx="194" cy="45" r="1.2"/><circle cx="214" cy="45" r="1.2"/><circle cx="234" cy="45" r="1.2"/><circle cx="254" cy="45" r="1.2"/><circle cx="274" cy="45" r="1.2"/><circle cx="294" cy="45" r="1.2"/><circle cx="314" cy="45" r="1.2"/><circle cx="334" cy="45" r="1.2"/><circle cx="354" cy="45" r="1.2"/><circle cx="374" cy="45" r="1.2"/><circle cx="394" cy="45" r="1.2"/><circle cx="414" cy="45" r="1.2"/><circle cx="434" cy="45" r="1.2"/><circle cx="454" cy="45" r="1.2"/><circle cx="474" cy="45" r="1.2"/><circle cx="494" cy="45" r="1.2"/><circle cx="514" cy="45" r="1.2"/>
+    <circle cx="114" cy="105" r="1.2"/><circle cx="134" cy="105" r="1.2"/><circle cx="154" cy="105" r="1.2"/><circle cx="174" cy="105" r="1.2"/><circle cx="194" cy="105" r="1.2"/><circle cx="214" cy="105" r="1.2"/><circle cx="234" cy="105" r="1.2"/><circle cx="254" cy="105" r="1.2"/><circle cx="274" cy="105" r="1.2"/><circle cx="294" cy="105" r="1.2"/><circle cx="314" cy="105" r="1.2"/><circle cx="334" cy="105" r="1.2"/><circle cx="354" cy="105" r="1.2"/><circle cx="374" cy="105" r="1.2"/><circle cx="394" cy="105" r="1.2"/><circle cx="414" cy="105" r="1.2"/><circle cx="434" cy="105" r="1.2"/><circle cx="454" cy="105" r="1.2"/><circle cx="474" cy="105" r="1.2"/><circle cx="494" cy="105" r="1.2"/><circle cx="514" cy="105" r="1.2"/>
+  </g>
+
+  <!-- Orbiting 3D Silver Balls Spelling "BRICKWORK" -->
+  <g fill="url(#silverBall)">
+    <!-- B -->
+    <circle cx="118" cy="54" r="4.2"/><circle cx="127" cy="54" r="4.2"/><circle cx="136" cy="54" r="4.2"/>
+    <circle cx="118" cy="64" r="4.2"/><circle cx="145" cy="64" r="4.2"/>
+    <circle cx="118" cy="74" r="4.2"/><circle cx="127" cy="74" r="4.2"/><circle cx="136" cy="74" r="4.2"/>
+    <circle cx="118" cy="84" r="4.2"/><circle cx="145" cy="84" r="4.2"/>
+    <circle cx="118" cy="94" r="4.2"/><circle cx="127" cy="94" r="4.2"/><circle cx="136" cy="94" r="4.2"/>
+    <!-- R -->
+    <circle cx="164" cy="54" r="4.2"/><circle cx="173" cy="54" r="4.2"/><circle cx="182" cy="54" r="4.2"/>
+    <circle cx="164" cy="64" r="4.2"/><circle cx="191" cy="64" r="4.2"/>
+    <circle cx="164" cy="74" r="4.2"/><circle cx="173" cy="74" r="4.2"/><circle cx="182" cy="74" r="4.2"/>
+    <circle cx="164" cy="84" r="4.2"/><circle cx="182" cy="84" r="4.2"/>
+    <circle cx="164" cy="94" r="4.2"/><circle cx="191" cy="94" r="4.2"/>
+    <!-- I -->
+    <circle cx="210" cy="54" r="4.2"/><circle cx="219" cy="54" r="4.2"/><circle cx="228" cy="54" r="4.2"/>
+    <circle cx="219" cy="64" r="4.2"/><circle cx="219" cy="74" r="4.2"/><circle cx="219" cy="84" r="4.2"/>
+    <circle cx="210" cy="94" r="4.2"/><circle cx="219" cy="94" r="4.2"/><circle cx="228" cy="94" r="4.2"/>
+    <!-- C -->
+    <circle cx="255" cy="54" r="4.2"/><circle cx="264" cy="54" r="4.2"/><circle cx="273" cy="54" r="4.2"/>
+    <circle cx="246" cy="64" r="4.2"/><circle cx="246" cy="74" r="4.2"/><circle cx="246" cy="84" r="4.2"/>
+    <circle cx="255" cy="94" r="4.2"/><circle cx="264" cy="94" r="4.2"/><circle cx="273" cy="94" r="4.2"/>
+    <!-- K -->
+    <circle cx="292" cy="54" r="4.2"/><circle cx="319" cy="54" r="4.2"/>
+    <circle cx="292" cy="64" r="4.2"/><circle cx="310" cy="64" r="4.2"/>
+    <circle cx="292" cy="74" r="4.2"/><circle cx="301" cy="74" r="4.2"/>
+    <circle cx="292" cy="84" r="4.2"/><circle cx="310" cy="84" r="4.2"/>
+    <circle cx="292" cy="94" r="4.2"/><circle cx="319" cy="94" r="4.2"/>
+    <!-- W -->
+    <circle cx="338" cy="54" r="4.2"/><circle cx="374" cy="54" r="4.2"/>
+    <circle cx="338" cy="64" r="4.2"/><circle cx="374" cy="64" r="4.2"/>
+    <circle cx="338" cy="74" r="4.2"/><circle cx="356" cy="74" r="4.2"/><circle cx="374" cy="74" r="4.2"/>
+    <circle cx="338" cy="84" r="4.2"/><circle cx="347" cy="84" r="4.2"/><circle cx="365" cy="84" r="4.2"/><circle cx="374" cy="84" r="4.2"/>
+    <circle cx="338" cy="94" r="4.2"/><circle cx="374" cy="94" r="4.2"/>
+    <!-- O -->
+    <circle cx="401" cy="54" r="4.2"/><circle cx="410" cy="54" r="4.2"/>
+    <circle cx="392" cy="64" r="4.2"/><circle cx="419" cy="64" r="4.2"/>
+    <circle cx="392" cy="74" r="4.2"/><circle cx="419" cy="74" r="4.2"/>
+    <circle cx="392" cy="84" r="4.2"/><circle cx="419" cy="84" r="4.2"/>
+    <circle cx="401" cy="94" r="4.2"/><circle cx="410" cy="94" r="4.2"/>
+    <!-- R -->
+    <circle cx="438" cy="54" r="4.2"/><circle cx="447" cy="54" r="4.2"/><circle cx="456" cy="54" r="4.2"/>
+    <circle cx="438" cy="64" r="4.2"/><circle cx="465" cy="64" r="4.2"/>
+    <circle cx="438" cy="74" r="4.2"/><circle cx="447" cy="74" r="4.2"/><circle cx="456" cy="74" r="4.2"/>
+    <circle cx="438" cy="84" r="4.2"/><circle cx="456" cy="84" r="4.2"/>
+    <circle cx="438" cy="94" r="4.2"/><circle cx="465" cy="94" r="4.2"/>
+    <!-- K -->
+    <circle cx="484" cy="54" r="4.2"/><circle cx="511" cy="54" r="4.2"/>
+    <circle cx="484" cy="64" r="4.2"/><circle cx="502" cy="64" r="4.2"/>
+    <circle cx="484" cy="74" r="4.2"/><circle cx="493" cy="74" r="4.2"/>
+    <circle cx="484" cy="84" r="4.2"/><circle cx="502" cy="84" r="4.2"/>
+    <circle cx="484" cy="94" r="4.2"/><circle cx="511" cy="94" r="4.2"/>
+  </g>
+
+  <!-- Subtitle -->
+  <text x="540" y="130" fill="#b8c8e0" font-family="'Courier New', monospace" font-weight="bold" font-size="12" text-anchor="end">Clean-Room Web Edition</text>
+
+  <!-- Center Tribute Gold Header -->
+  <text x="230" y="196" fill="url(#goldText)" font-family="Impact, 'Arial Black', sans-serif" font-weight="900" font-size="21" text-anchor="middle" letter-spacing="1">90S ARCADE BRICK-BREAKER</text>
+  <text x="230" y="224" fill="url(#goldText)" font-family="Impact, 'Arial Black', sans-serif" font-weight="900" font-size="21" text-anchor="middle" letter-spacing="1">CLASSIC &amp; MOBILE EDITION</text>
+
+  <!-- Right Action Buttons -->
+  <rect x="432" y="156" width="188" height="28" rx="5" fill="url(#btnActive)" stroke="#00ccff" stroke-width="2"/>
+  <text x="526" y="174" fill="#ffffff" font-family="'Courier New', monospace" font-weight="bold" font-size="12" text-anchor="middle">▶ CLASSIC (4:3)</text>
+
+  <rect x="432" y="190" width="188" height="28" rx="5" fill="url(#btnIdle)" stroke="#00ff88" stroke-width="1.2"/>
+  <text x="526" y="208" fill="#cce0f5" font-family="'Courier New', monospace" font-weight="bold" font-size="12" text-anchor="middle">▶ MODERN (MOBILE)</text>
+
+  <rect x="432" y="224" width="44" height="22" rx="4" fill="url(#btnIdle)" stroke="#aa88ff" stroke-width="1.2"/>
+  <text x="454" y="239" fill="#cce0f5" font-family="'Courier New', monospace" font-weight="bold" font-size="9.5" text-anchor="middle">INTRO</text>
+
+  <rect x="480" y="224" width="44" height="22" rx="4" fill="url(#btnIdle)" stroke="#ffaa00" stroke-width="1.2"/>
+  <text x="502" y="239" fill="#cce0f5" font-family="'Courier New', monospace" font-weight="bold" font-size="9.5" text-anchor="middle">SCORES</text>
+
+  <rect x="528" y="224" width="44" height="22" rx="4" fill="url(#btnIdle)" stroke="#00e0ff" stroke-width="1.2"/>
+  <text x="550" y="239" fill="#cce0f5" font-family="'Courier New', monospace" font-weight="bold" font-size="9.5" text-anchor="middle">EDITOR</text>
+
+  <rect x="576" y="224" width="44" height="22" rx="4" fill="url(#btnIdle)" stroke="#44ffaa" stroke-width="1.2"/>
+  <text x="598" y="239" fill="#cce0f5" font-family="'Courier New', monospace" font-weight="bold" font-size="9.5" text-anchor="middle">⛶ FULL</text>
+
+  <!-- 3x6 Power-Up Legend (All 18 3D Beveled Tiles) -->
+  <!-- Column 1 (x=34) -->
+  <g transform="translate(34, 260)" font-family="'Courier New', monospace" font-weight="bold" font-size="10.5" fill="#e8f0ff">
+    <!-- Expand Paddle -->
+    <rect x="0" y="0" width="28" height="28" fill="#888894" stroke="#d8d8e4" stroke-width="2"/>
+    <text x="14" y="18" fill="#2244ff" font-size="14" text-anchor="middle">↔</text>
+    <text x="35" y="11">Expand</text><text x="35" y="23">Paddle</text>
+    <!-- Thru Brick -->
+    <g transform="translate(0, 32)">
+      <rect x="0" y="0" width="28" height="28" fill="#0018a8" stroke="#4477ff" stroke-width="2"/>
+      <rect x="8" y="9" width="12" height="9" fill="#cc5500"/><line x1="5" y1="22" x2="22" y2="6" stroke="#ffffff" stroke-width="2"/>
+      <text x="35" y="11">Thru</text><text x="35" y="23">Brick</text>
+    </g>
+    <!-- Set-Off Exploding -->
+    <g transform="translate(0, 64)">
+      <rect x="0" y="0" width="28" height="28" fill="#0018a8" stroke="#4477ff" stroke-width="2"/>
+      <rect x="10" y="10" width="8" height="12" fill="#dd0000"/><circle cx="9" cy="7" r="3" fill="#ffff00"/>
+      <text x="35" y="11">Set-Off</text><text x="35" y="23">Exploding</text>
+    </g>
+    <!-- FireBall -->
+    <g transform="translate(0, 96)">
+      <rect x="0" y="0" width="28" height="28" fill="#0018a8" stroke="#4477ff" stroke-width="2"/>
+      <polygon points="22,6 7,17 12,22" fill="#ff8800"/><circle cx="9" cy="19" r="3.5" fill="#ffffff"/>
+      <text x="35" y="17">FireBall</text>
+    </g>
+    <!-- Shooting Paddle -->
+    <g transform="translate(0, 128)">
+      <rect x="0" y="0" width="28" height="28" fill="#0018a8" stroke="#4477ff" stroke-width="2"/>
+      <rect x="9" y="7" width="3" height="12" fill="#ff2222"/><rect x="16" y="7" width="3" height="12" fill="#ff2222"/><rect x="6" y="19" width="16" height="4" fill="#b0b8c8"/>
+      <text x="35" y="11">Shooting</text><text x="35" y="23">Paddle</text>
+    </g>
+    <!-- Grab Paddle -->
+    <g transform="translate(0, 160)">
+      <rect x="0" y="0" width="28" height="28" fill="#0018a8" stroke="#4477ff" stroke-width="2"/>
+      <rect x="8" y="15" width="12" height="4" fill="#22cc44"/><rect x="6" y="19" width="16" height="4" fill="#b0b8c8"/><circle cx="14" cy="12" r="3" fill="#ffffff"/>
+      <text x="35" y="11">Grab</text><text x="35" y="23">Paddle</text>
+    </g>
+  </g>
+
+  <!-- Column 2 (x=162) -->
+  <g transform="translate(162, 260)" font-family="'Courier New', monospace" font-weight="bold" font-size="10.5" fill="#e8f0ff">
+    <!-- Shrink Paddle -->
+    <rect x="0" y="0" width="28" height="28" fill="#888894" stroke="#d8d8e4" stroke-width="2"/>
+    <text x="14" y="18" fill="#2244ff" font-size="13" text-anchor="middle">→←</text>
+    <text x="35" y="11">Shrink</text><text x="35" y="23">Paddle</text>
+    <!-- Extra Life -->
+    <g transform="translate(0, 32)">
+      <rect x="0" y="0" width="28" height="28" fill="#0018a8" stroke="#4477ff" stroke-width="2"/>
+      <text x="14" y="19" fill="#ffffff" font-family="serif" font-size="15" text-anchor="middle">+1</text>
+      <text x="35" y="11">Extra</text><text x="35" y="23">Life</text>
+    </g>
+    <!-- Level Warp -->
+    <g transform="translate(0, 64)">
+      <rect x="0" y="0" width="28" height="28" fill="#0018a8" stroke="#4477ff" stroke-width="2"/>
+      <rect x="5" y="7" width="18" height="4" fill="#ff4400"/><rect x="9" y="7" width="6" height="4" fill="#44ff44"/><circle cx="14" cy="17" r="2.5" fill="#ffff00"/>
+      <text x="35" y="11">Level</text><text x="35" y="23">Warp</text>
+    </g>
+    <!-- Zap Bricks -->
+    <g transform="translate(0, 96)">
+      <rect x="0" y="0" width="28" height="28" fill="#0018a8" stroke="#4477ff" stroke-width="2"/>
+      <rect x="7" y="10" width="13" height="7" fill="#00cccc"/><polyline points="7,6 15,13 12,15 21,22" fill="none" stroke="#ffff00" stroke-width="2"/>
+      <text x="35" y="11">Zap</text><text x="35" y="23">Bricks</text>
+    </g>
+    <!-- Slow Ball -->
+    <g transform="translate(0, 128)">
+      <rect x="0" y="0" width="28" height="28" fill="#0018a8" stroke="#4477ff" stroke-width="2"/>
+      <circle cx="17" cy="17" r="3.5" fill="#ffffff"/><circle cx="12" cy="12" r="3" fill="none" stroke="#3399ff" stroke-width="1.5"/>
+      <text x="35" y="11">Slow</text><text x="35" y="23">Ball</text>
+    </g>
+    <!-- Multiply Exploding -->
+    <g transform="translate(0, 160)">
+      <rect x="0" y="0" width="28" height="28" fill="#0018a8" stroke="#4477ff" stroke-width="2"/>
+      <rect x="11" y="5" width="6" height="18" fill="#ff6600"/><rect x="5" y="11" width="18" height="6" fill="#ff6600"/>
+      <rect x="12.5" y="7" width="3" height="14" fill="#ffffff"/><rect x="7" y="12.5" width="14" height="3" fill="#ffffff"/>
+      <text x="35" y="11">Multiply</text><text x="35" y="23">Exploding</text>
+    </g>
+  </g>
+
+  <!-- Column 3 (x=290) -->
+  <g transform="translate(290, 260)" font-family="'Courier New', monospace" font-weight="bold" font-size="10.5" fill="#e8f0ff">
+    <!-- Split Ball -->
+    <rect x="0" y="0" width="28" height="28" fill="#888894" stroke="#d8d8e4" stroke-width="2"/>
+    <line x1="14" y1="9" x2="8" y2="19" stroke="#22ee44" stroke-width="2"/><line x1="14" y1="9" x2="20" y2="19" stroke="#22ee44" stroke-width="2"/>
+    <circle cx="14" cy="8" r="3" fill="#ffffff"/><circle cx="8" cy="19" r="3" fill="#ffffff"/><circle cx="20" cy="19" r="3" fill="#ffffff"/>
+    <text x="35" y="11">Split</text><text x="35" y="23">Ball</text>
+    <!-- Kill Paddle -->
+    <g transform="translate(0, 32)">
+      <rect x="0" y="0" width="28" height="28" fill="#a80808" stroke="#ff4848" stroke-width="2"/>
+      <circle cx="14" cy="11" r="5" fill="#ffffff"/><line x1="7" y1="18" x2="21" y2="23" stroke="#ffffff" stroke-width="2"/><line x1="21" y1="18" x2="7" y2="23" stroke="#ffffff" stroke-width="2"/>
+      <text x="35" y="11">Kill</text><text x="35" y="23">Paddle</text>
+    </g>
+    <!-- Shrink Ball -->
+    <g transform="translate(0, 64)">
+      <rect x="0" y="0" width="28" height="28" fill="#a80808" stroke="#ff4848" stroke-width="2"/>
+      <circle cx="14" cy="14" r="2.5" fill="#ffffff"/>
+      <text x="35" y="11">Shrink</text><text x="35" y="23">Ball</text>
+    </g>
+    <!-- Fast Ball -->
+    <g transform="translate(0, 96)">
+      <rect x="0" y="0" width="28" height="28" fill="#a80808" stroke="#ff4848" stroke-width="2"/>
+      <text x="14" y="19" fill="#ffee00" font-size="14" text-anchor="middle">&gt;&gt;&gt;</text>
+      <text x="35" y="11">Fast</text><text x="35" y="23">Ball</text>
+    </g>
+    <!-- Super Shrink -->
+    <g transform="translate(0, 128)">
+      <rect x="0" y="0" width="28" height="28" fill="#a80808" stroke="#ff4848" stroke-width="2"/>
+      <rect x="8" y="12" width="12" height="4" fill="#333333" stroke="#000000" stroke-width="1"/>
+      <text x="35" y="11">Super</text><text x="35" y="23">Shrink</text>
+    </g>
+    <!-- Falling Bricks -->
+    <g transform="translate(0, 160)">
+      <rect x="0" y="0" width="28" height="28" fill="#a80808" stroke="#ff4848" stroke-width="2"/>
+      <rect x="7" y="6" width="14" height="7" fill="#7711aa"/><line x1="14" y1="14" x2="14" y2="23" stroke="#ffee00" stroke-width="2"/>
+      <text x="35" y="11">Falling</text><text x="35" y="23">Bricks</text>
+    </g>
+  </g>
+
+  <!-- Bottom-Right Tilted Red-and-White Checkered 3D Boing Sphere -->
+  <g transform="translate(556, 368) rotate(15)">
+    <circle cx="0" cy="0" r="62" fill="#cc0000" stroke="#440000" stroke-width="2"/>
+    <!-- Checkered patches -->
+    <path d="M-58,-20 L-30,-20 L-25,0 L-62,0 Z" fill="#ffffff"/>
+    <path d="M-2, -20 L28,-20 L30,0 L0,0 Z" fill="#ffffff"/>
+    <path d="M-55,20 L-25,20 L-30,0 L-62,0 Z" fill="#cc0000"/>
+    <path d="M-25,0 L0,0 L-2,20 L-28,20 Z" fill="#ffffff"/>
+    <path d="M30,0 L62,0 L58,20 L28,20 Z" fill="#ffffff"/>
+    <path d="M-45,-40 L-18,-40 L-30,-20 L-58,-20 Z" fill="#cc0000"/>
+    <path d="M-18,-40 L2,-40 L-2,-20 L-30,-20 Z" fill="#ffffff"/>
+    <path d="M25,-40 L48,-40 L58,-20 L28,-20 Z" fill="#ffffff"/>
+    <path d="M-48,40 L-20,40 L-28,20 L-58,20 Z" fill="#ffffff"/>
+    <path d="M0,20 L28,20 L22,40 L-2,40 Z" fill="#ffffff"/>
+    <circle cx="-18" cy="-18" r="52" fill="url(#spot)" opacity="0.45"/>
+  </g>
+
+  <!-- Bottom Clean-Room Attribution Footer -->
+  <text x="8" y="464" fill="#8899b0" font-family="'Courier New', monospace" font-size="10">Brickwork — Open-Source Clean-Room Reimplementation (HTML5 Canvas &amp; WebAudio).</text>
+  <text x="8" y="476" fill="#8899b0" font-family="'Courier New', monospace" font-size="10">An independent tribute inspired by classic 1990s Amiga &amp; PC brick-breaker games.</text>
+</svg>

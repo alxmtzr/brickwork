@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="borderL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#d8d8ec"/>
+      <stop offset="55%" stop-color="#8888a4"/>
+      <stop offset="100%" stop-color="#303040"/>
+    </linearGradient>
+    <linearGradient id="borderR" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#303040"/>
+      <stop offset="45%" stop-color="#8888a4"/>
+      <stop offset="100%" stop-color="#d8d8ec"/>
+    </linearGradient>
+    <linearGradient id="scoreGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffff22"/>
+      <stop offset="50%" stop-color="#88bbff"/>
+      <stop offset="100%" stop-color="#3366cc"/>
+    </linearGradient>
+    <linearGradient id="paddleCyl" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b0b4bc"/>
+      <stop offset="25%" stop-color="#60646c"/>
+      <stop offset="50%" stop-color="#d8dce4"/>
+      <stop offset="75%" stop-color="#484c54"/>
+      <stop offset="100%" stop-color="#90949c"/>
+    </linearGradient>
+    <radialGradient id="fireBall" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#ffaa00"/>
+      <stop offset="100%" stop-color="#cc2200"/>
+    </radialGradient>
+    <radialGradient id="silverBall" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#cccccc"/>
+      <stop offset="100%" stop-color="#333333"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Playfield Background -->
+  <rect width="640" height="480" fill="#000000"/>
+
+  <!-- Metallic Cylinder Side Borders -->
+  <rect x="0" y="0" width="20" height="480" fill="url(#borderL)"/>
+  <rect x="620" y="0" width="20" height="480" fill="url(#borderR)"/>
+
+  <!-- Top HUD: Score & Life Paddles -->
+  <text x="28" y="22" fill="url(#scoreGrad)" font-family="Impact, 'Arial Black', monospace" font-weight="900" font-size="22">18450</text>
+  <g transform="translate(550, 12)">
+    <rect x="0" y="0" width="2" height="5" fill="#00d8ff"/><rect x="2" y="0" width="20" height="5" fill="#9098a8"/><rect x="22" y="0" width="2" height="5" fill="#00d8ff"/>
+    <rect x="30" y="0" width="2" height="5" fill="#00d8ff"/><rect x="32" y="0" width="20" height="5" fill="#9098a8"/><rect x="52" y="0" width="2" height="5" fill="#00d8ff"/>
+  </g>
+
+  <!-- 20x20 Recessed 3D Bricks + Explosive Cluster -->
+  <g transform="translate(20, 75)">
+    <!-- Row 0: Purple Recessed Bricks -->
+    <g fill="#6818a8" stroke="#a858e8" stroke-width="1">
+      <rect x="30" y="0" width="30" height="15"/><rect x="60" y="0" width="30" height="15"/><rect x="90" y="0" width="30" height="15"/><rect x="120" y="0" width="30" height="15"/><rect x="150" y="0" width="30" height="15"/><rect x="180" y="0" width="30" height="15"/><rect x="210" y="0" width="30" height="15"/><rect x="240" y="0" width="30" height="15"/><rect x="270" y="0" width="30" height="15"/><rect x="300" y="0" width="30" height="15"/><rect x="330" y="0" width="30" height="15"/><rect x="360" y="0" width="30" height="15"/><rect x="390" y="0" width="30" height="15"/><rect x="420" y="0" width="30" height="15"/><rect x="450" y="0" width="30" height="15"/><rect x="480" y="0" width="30" height="15"/><rect x="510" y="0" width="30" height="15"/><rect x="540" y="0" width="30" height="15"/>
+    </g>
+    <!-- Row 1: Cyan Recessed Bricks -->
+    <g fill="#00b8b8" stroke="#60ffff" stroke-width="1">
+      <rect x="30" y="15" width="30" height="15"/><rect x="60" y="15" width="30" height="15"/><rect x="90" y="15" width="30" height="15"/><rect x="120" y="15" width="30" height="15"/><rect x="150" y="15" width="30" height="15"/><rect x="180" y="15" width="30" height="15"/><rect x="210" y="15" width="30" height="15"/><rect x="240" y="15" width="30" height="15"/><rect x="270" y="15" width="30" height="15"/><rect x="300" y="15" width="30" height="15"/><rect x="330" y="15" width="30" height="15"/><rect x="360" y="15" width="30" height="15"/><rect x="390" y="15" width="30" height="15"/><rect x="420" y="15" width="30" height="15"/><rect x="450" y="15" width="30" height="15"/><rect x="480" y="15" width="30" height="15"/><rect x="510" y="15" width="30" height="15"/><rect x="540" y="15" width="30" height="15"/>
+    </g>
+    <!-- Row 2: Green Bricks + Explosive Core -->
+    <g fill="#00b818" stroke="#58ff68" stroke-width="1">
+      <rect x="30" y="30" width="30" height="15"/><rect x="60" y="30" width="30" height="15"/><rect x="90" y="30" width="30" height="15"/><rect x="120" y="30" width="30" height="15"/><rect x="150" y="30" width="30" height="15"/><rect x="180" y="30" width="30" height="15"/>
+      <rect x="390" y="30" width="30" height="15"/><rect x="420" y="30" width="30" height="15"/><rect x="450" y="30" width="30" height="15"/><rect x="480" y="30" width="30" height="15"/><rect x="510" y="30" width="30" height="15"/><rect x="540" y="30" width="30" height="15"/>
+    </g>
+    <!-- Explosive Bricks (Glowing Orange/Yellow Diamond Cores) -->
+    <g fill="#ff8800" stroke="#ffff44" stroke-width="1.5">
+      <rect x="210" y="30" width="30" height="15"/><rect x="240" y="30" width="30" height="15"/><rect x="270" y="30" width="30" height="15"/><rect x="300" y="30" width="30" height="15"/><rect x="330" y="30" width="30" height="15"/>
+      <rect x="210" y="45" width="30" height="15"/><rect x="240" y="45" width="30" height="15"/><rect x="270" y="45" width="30" height="15"/>
+    </g>
+    <!-- Row 3 & 4: Deep Blue & Crimson Bricks (partially cleared by explosions) -->
+    <g fill="#0028c8" stroke="#4870ff" stroke-width="1">
+      <rect x="30" y="45" width="30" height="15"/><rect x="60" y="45" width="30" height="15"/><rect x="90" y="45" width="30" height="15"/><rect x="120" y="45" width="30" height="15"/><rect x="150" y="45" width="30" height="15"/>
+      <rect x="420" y="45" width="30" height="15"/><rect x="450" y="45" width="30" height="15"/><rect x="480" y="45" width="30" height="15"/><rect x="510" y="45" width="30" height="15"/><rect x="540" y="45" width="30" height="15"/>
+    </g>
+    <g fill="#c81058" stroke="#ff5898" stroke-width="1">
+      <rect x="30" y="60" width="30" height="15"/><rect x="60" y="60" width="30" height="15"/><rect x="90" y="60" width="30" height="15"/><rect x="120" y="60" width="30" height="15"/>
+      <rect x="450" y="60" width="30" height="15"/><rect x="480" y="60" width="30" height="15"/><rect x="510" y="60" width="30" height="15"/><rect x="540" y="60" width="30" height="15"/>
+    </g>
+  </g>
+
+  <!-- Particle Explosion Sparks -->
+  <g fill="#ffff44">
+    <rect x="335" y="128" width="4" height="4"/><rect x="352" y="118" width="3" height="3"/><rect x="368" y="135" width="4" height="4"/><rect x="320" y="142" width="3" height="3"/>
+  </g>
+  <g fill="#ff6600">
+    <rect x="342" y="138" width="4" height="4"/><rect x="360" y="124" width="4" height="4"/><rect x="328" y="120" width="3" height="3"/><rect x="375" y="146" width="3" height="3"/>
+  </g>
+
+  <!-- Falling 32x32 3D Beveled Power-Up Tile (FireBall) -->
+  <g transform="translate(274, 250)">
+    <rect x="0" y="0" width="32" height="32" fill="#0018a8" stroke="#4477ff" stroke-width="2.5"/>
+    <polygon points="25,6 8,19 13,24" fill="#ff6600"/>
+    <polygon points="23,8 10,19 13,22" fill="#ffff88"/>
+    <circle cx="10" cy="21" r="3.8" fill="#ffffff"/>
+  </g>
+
+  <!-- Floating Power-Up Text -->
+  <text x="340" y="210" fill="#ff6600" font-family="system-ui, sans-serif" font-weight="bold" font-size="14" text-anchor="middle">FIREBALL!</text>
+
+  <!-- Active Fireball + Split Silver Ball -->
+  <circle cx="348" cy="155" r="6" fill="url(#fireBall)"/>
+  <circle cx="344" cy="163" r="3" fill="#ffaa00" opacity="0.7"/>
+  <circle cx="215" cy="295" r="5.5" fill="url(#silverBall)"/>
+
+  <!-- Twin Laser Shots -->
+  <rect x="286" y="340" width="4" height="10" fill="#ff2200"/><rect x="287" y="342" width="2" height="6" fill="#ffff55"/>
+  <rect x="350" y="340" width="4" height="10" fill="#ff2200"/><rect x="351" y="342" width="2" height="6" fill="#ffff55"/>
+
+  <!-- Ribbed Metallic Paddle with Cyan Glowing End-Caps & Laser Turrets -->
+  <g transform="translate(280, 444)">
+    <rect x="5" y="0" width="70" height="13" fill="url(#paddleCyl)"/>
+    <path d="M6,0 A6.5,6.5 0 0,0 6,13 Z" fill="#00d8ff"/>
+    <path d="M74,0 A6.5,6.5 0 0,1 74,13 Z" fill="#00d8ff"/>
+    <!-- Laser Turrets -->
+    <rect x="5" y="-6" width="4" height="6" fill="#aaaaaa"/><rect x="6" y="-8" width="2" height="3" fill="#ff2222"/>
+    <rect x="71" y="-6" width="4" height="6" fill="#aaaaaa"/><rect x="72" y="-8" width="2" height="3" fill="#ff2222"/>
+  </g>
+</svg>

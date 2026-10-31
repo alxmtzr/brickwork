@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="rasterGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#662200"/>
+      <stop offset="50%" stop-color="#ffff22"/>
+      <stop offset="100%" stop-color="#882200"/>
+    </linearGradient>
+    <linearGradient id="rasterGreenBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00aa00"/>
+      <stop offset="40%" stop-color="#44ff44"/>
+      <stop offset="70%" stop-color="#0044ff"/>
+      <stop offset="100%" stop-color="#001166"/>
+    </linearGradient>
+    <linearGradient id="redBand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#220000"/>
+      <stop offset="50%" stop-color="#880000"/>
+      <stop offset="100%" stop-color="#330000"/>
+    </linearGradient>
+    <linearGradient id="blueBand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000044"/>
+      <stop offset="50%" stop-color="#000099"/>
+      <stop offset="100%" stop-color="#000022"/>
+    </linearGradient>
+    <linearGradient id="candyText" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffcc44"/>
+      <stop offset="50%" stop-color="#cc6600"/>
+      <stop offset="100%" stop-color="#ffaa22"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="640" height="480" fill="#000000"/>
+
+  <!-- Top Gold/Orange Oscillating Raster Bar -->
+  <rect x="0" y="12" width="640" height="16" fill="url(#rasterGold)"/>
+
+  <!-- Large Outlined BRICK·WORK Logo -->
+  <text x="320" y="88" fill="none" stroke="#b8d8e8" stroke-width="4" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="74" text-anchor="middle">BRICK·WORK</text>
+  <text x="320" y="88" fill="none" stroke="#ffffff" stroke-width="1.5" font-family="'Arial Black', Impact, sans-serif" font-weight="900" font-size="74" text-anchor="middle">BRICK·WORK</text>
+
+  <!-- Lower Green/Blue Oscillating Raster Bar -->
+  <rect x="0" y="124" width="640" height="16" fill="url(#rasterGreenBlue)"/>
+
+  <!-- Red Gradient Band -->
+  <rect x="0" y="165" width="640" height="58" fill="url(#redBand)"/>
+  <text x="20" y="192" fill="url(#candyText)" font-family="'Courier New', monospace" font-weight="900" font-size="18">VIDEO ENGINE: HTML5 CANVAS ACCELERATION FOUND</text>
+  <text x="320" y="214" fill="url(#candyText)" font-family="'Courier New', monospace" font-weight="900" font-size="18" text-anchor="middle">AND SUPPORTED</text>
+
+  <!-- Project & Engine Credits -->
+  <text x="20" y="255" fill="url(#candyText)" font-family="'Courier New', monospace" font-weight="900" font-size="18">PROJECT:     BRICKWORK ARCADE</text>
+  <text x="20" y="280" fill="url(#candyText)" font-family="'Courier New', monospace" font-weight="900" font-size="18">ENGINE:      CLEAN-ROOM TYPESCRIPT &amp; WEBAUDIO</text>
+  <text x="20" y="312" fill="url(#candyText)" font-family="'Courier New', monospace" font-weight="900" font-size="18">VIEW MODES:  CLASSIC 4:3 + MOBILE FULLSCREEN</text>
+
+  <!-- Blue Gradient Band -->
+  <rect x="0" y="330" width="640" height="60" fill="url(#blueBand)"/>
+  <text x="320" y="355" fill="url(#candyText)" font-family="'Courier New', monospace" font-weight="900" font-size="18" text-anchor="middle">INCLUDES 50 CAMPAIGN BOARDS + 20X20 LEVEL EDITOR</text>
+  <text x="320" y="378" fill="url(#candyText)" font-family="'Courier New', monospace" font-weight="900" font-size="18" text-anchor="middle">18 POWER-UP TILES WITH PARABOLIC GRAVITY PHYSICS</text>
+
+  <!-- Sine-Wave Scrolling 3D Purple Chiseled Text -->
+  <g font-family="Impact, 'Arial Black', sans-serif" font-weight="900" font-size="28" fill="#9933ff" stroke="#ddaaff" stroke-width="1">
+    <text x="24" y="442">W</text>
+    <text x="48" y="434">E</text>
+    <text x="68" y="426">L</text>
+    <text x="88" y="421">C</text>
+    <text x="110" y="420">O</text>
+    <text x="134" y="424">M</text>
+    <text x="158" y="432">E</text>
+    <text x="196" y="446">T</text>
+    <text x="218" y="452">O</text>
+    <text x="256" y="450">B</text>
+    <text x="278" y="442">R</text>
+    <text x="300" y="432">I</text>
+    <text x="316" y="423">C</text>
+    <text x="338" y="420">K</text>
+    <text x="362" y="423">W</text>
+    <text x="388" y="431">O</text>
+    <text x="410" y="441">R</text>
+    <text x="432" y="449">K</text>
+    <text x="454" y="452">!</text>
+    <text x="492" y="443">A</text>
+    <text x="530" y="428">C</text>
+    <text x="552" y="421">L</text>
+    <text x="572" y="420">E</text>
+    <text x="594" y="425">A</text>
+    <text x="616" y="433">N</text>
+  </g>
+</svg>
