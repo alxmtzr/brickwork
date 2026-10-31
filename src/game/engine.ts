@@ -12,7 +12,9 @@ import {
   BRICK_COLORS,
   BRICK_H,
   BRICK_W,
-  DXBALL_DOT_MATRIX_41X7,
+  BRICKWORK_DOT_COLS,
+  BRICKWORK_DOT_MATRIX,
+  BRICKWORK_DOT_ROWS,
   MENU_POWERUP_COLUMNS,
   ORIGINAL_SCROLLER_TEXT,
   PLAYFIELD_LEFT,
@@ -166,11 +168,11 @@ export class GameEngine {
         this.highScores = JSON.parse(saved);
       } else {
         this.highScores = [
-          { name: "SCORCH", score: 18500 },
-          { name: "SEUMAS", score: 14200 },
-          { name: "MACKEY", score: 11000 },
-          { name: "MEGABALL", score: 8500 },
-          { name: "AMIGA", score: 6000 },
+          { name: "NOVA", score: 18500 },
+          { name: "VECTOR", score: 14200 },
+          { name: "CYBER", score: 11000 },
+          { name: "PULSAR", score: 8500 },
+          { name: "ORBIT", score: 6000 },
         ];
       }
       const savedLast = localStorage.getItem("brickwork_lastscore");
@@ -1117,8 +1119,8 @@ export class GameEngine {
   }
 
   // ============================================================================
-  // AUTHENTIC DX-BALL 1.09 START / MAIN MENU SCREEN
-  // Reconstructed from Mainmenu.pcx, FUN_0040af80, FUN_0040b2d0 & FUN_0040ba40
+  // BRICKWORK RETRO START / MAIN MENU SCREEN
+  // Clean-room orbiting 3D silver-ball dot-matrix + 3x6 18-power-up legend
   // ============================================================================
   private renderModeSelectScreen() {
     const ctx = this.ctx;
@@ -1130,7 +1132,7 @@ export class GameEngine {
 
     ctx.save();
 
-    // 1. Top Status Line: "Last Score - <N>" (left) and "V 1.09" (right) (FUN_0040af80 lines 116-119)
+    // 1. Top Status Line: "Last Score - <N>" (left) and "V 1.0" (right)
     const topY = isModernPortrait ? Math.max(44, H * 0.055) : 14 * sy;
     ctx.font = `bold ${Math.max(11, Math.round(12 * sx))}px 'Courier New', monospace`;
     ctx.fillStyle = "#d8e0f0";
@@ -1138,10 +1140,10 @@ export class GameEngine {
     ctx.textAlign = "left";
     ctx.fillText(`Last Score - ${this.lastScore}`, 8 * sx, topY);
     ctx.textAlign = "right";
-    ctx.fillText("V 1.09", W - 8 * sx, topY);
+    ctx.fillText("V 1.0", W - 8 * sx, topY);
 
-    // 2. Top Cyan Box & Side Spotlights (Mainmenu.pcx: x=112..530, y=37..115)
-    const boxW = isModernPortrait ? W * 0.86 : 422 * sx;
+    // 2. Top Cyan Box & Side Spotlights
+    const boxW = isModernPortrait ? W * 0.88 : 440 * sx;
     const boxH = isModernPortrait ? Math.max(66, H * 0.095) : 80 * sy;
     const boxX = (W - boxW) / 2;
     const boxY = isModernPortrait ? topY + 20 : 35 * sy;
@@ -1177,14 +1179,14 @@ export class GameEngine {
     ctx.lineWidth = 1.5;
     ctx.strokeRect(boxX - 1, boxY - 1, boxW + 2, boxH + 2);
 
-    // 3. Inside Cyan Box: The 41x7 Orbiting Ball Dot-Matrix (FUN_0040b2d0 & FUN_0040ba40)
-    const cols = 41;
-    const rows = 7;
+    // 3. Inside Cyan Box: The 46x7 Orbiting Ball Dot-Matrix spelling "BRICKWORK"
+    const cols = BRICKWORK_DOT_COLS;
+    const rows = BRICKWORK_DOT_ROWS;
     const cellStepX = (boxW - 16 * sx) / cols;
     const cellStepY = (boxH - 12 * sy) / rows;
     const startX = boxX + 8 * sx + cellStepX / 2;
     const startY = boxY + 6 * sy + cellStepY / 2;
-    const ballR = Math.max(2.6, Math.min(cellStepX, cellStepY) * 0.46);
+    const ballR = Math.max(2.4, Math.min(cellStepX, cellStepY) * 0.46);
     const orbitRx = cellStepX * 0.38;
     const orbitRy = cellStepY * 0.32;
 
@@ -1192,7 +1194,7 @@ export class GameEngine {
     ctx.fillStyle = "#489898";
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
-        const val = DXBALL_DOT_MATRIX_41X7[r * cols + c];
+        const val = BRICKWORK_DOT_MATRIX[r * cols + c];
         if (val === 0) {
           const deg = (this.matrixAngleDeg + c * 20 + r * 35) % 360;
           const rad = (deg * Math.PI) / 180;
@@ -1203,10 +1205,10 @@ export class GameEngine {
       }
     }
 
-    // Pass 2: Foreground 3D Silver Balls spelling "DX-BALL" (where matrix == 1)
+    // Pass 2: Foreground 3D Silver Balls spelling "BRICKWORK" (where matrix == 1)
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
-        const val = DXBALL_DOT_MATRIX_41X7[r * cols + c];
+        const val = BRICKWORK_DOT_MATRIX[r * cols + c];
         if (val === 1) {
           const deg = (this.matrixAngleDeg + c * 20 + r * 35 + 30) % 360;
           const rad = (deg * Math.PI) / 180;
@@ -1225,13 +1227,13 @@ export class GameEngine {
       }
     }
 
-    // 4. "By Michael P. Welch" below right of cyan box (FUN_0040af80 line 121: x=0x1e5, y=0x82)
+    // 4. Subtitle below right of cyan box
     ctx.font = `bold ${Math.max(10, Math.round(12 * sx))}px 'Courier New', monospace`;
     ctx.fillStyle = "#b8c8e0";
     ctx.textAlign = "right";
-    ctx.fillText("By Michael P. Welch", boxX + boxW, boxY + boxH + 8 * sy);
+    ctx.fillText("Clean-Room Web Edition", boxX + boxW, boxY + boxH + 8 * sy);
 
-    // 5. Center Credits: 'BASED ON "MEGABALL"' / 'BY ED AND AL MACKEY' (FUN_0040af80 lines 128-130)
+    // 5. Center Tribute Banner
     const midY1 = isModernPortrait ? boxY + boxH + 26 : 196 * sy;
     const midY2 = isModernPortrait ? midY1 + 22 : 226 * sy;
     ctx.textAlign = "center";
@@ -1242,8 +1244,8 @@ export class GameEngine {
     goldGrad.addColorStop(1, "#aa4400");
     ctx.fillStyle = goldGrad;
     const creditCenterX = isModernPortrait ? W / 2 : 230 * sx;
-    ctx.fillText('BASED ON  "MEGABALL"', creditCenterX, midY1);
-    ctx.fillText("BY ED AND AL MACKEY", creditCenterX, midY2);
+    ctx.fillText("90S ARCADE BRICK-BREAKER", creditCenterX, midY1);
+    ctx.fillText("CLASSIC & MOBILE EDITION", creditCenterX, midY2);
 
     // 6. Interactive Mode / Action Buttons
     const rects = this.getMenuButtonRects();
@@ -1253,7 +1255,7 @@ export class GameEngine {
     this.drawRetroButton(rects.scoresBtn, "SCORES", "#ffaa00", false);
     this.drawRetroButton(rects.editorBtn, "EDITOR", "#00e0ff", false);
 
-    // 7. Bottom-Left 3 Columns x 6 Rows Power-Up Legend (All 18 Power-Ups from Mainmenu.pcx)
+    // 7. Bottom-Left 3 Columns x 6 Rows Power-Up Legend (All 18 Power-Ups)
     const legendTopY = isModernPortrait ? rects.introBtn.y + rects.introBtn.h + 14 : 264 * sy;
     const legendBottomY = H - (isModernPortrait ? 44 : 28 * sy);
     const availLegendH = legendBottomY - legendTopY;
@@ -1287,23 +1289,22 @@ export class GameEngine {
       }
     }
 
-    // 8. Bottom-Right Iconic Amiga Red & White Checkered Boing Ball (Mainmenu.pcx: cx=568, cy=388)
+    // 8. Bottom-Right Red & White Checkered 3D Sphere
     if (!isModernPortrait) {
       this.renderBoingBall(566 * sx, 384 * sy, 66 * Math.min(sx, sy));
     } else {
-      // In portrait smartphone mode, draw a compact Boing Ball badge in the header corner
       this.renderBoingBall(W - 36, midY1 + 8, 24);
     }
 
-    // 9. Bottom Copyright Footer (FUN_0040af80 lines 123-125)
+    // 9. Bottom Clean-Room Attribution Footer
     ctx.textAlign = "left";
     ctx.textBaseline = "bottom";
     ctx.fillStyle = "#8899b0";
     const footFont = Math.max(8, Math.round(10 * sx));
     ctx.font = `${footFont}px 'Courier New', monospace`;
-    ctx.fillText("Copyright 1996-98 by Michael P. Welch, All Rights Reserved.", 6 * sx, H - footFont - 4);
+    ctx.fillText("Brickwork — Open-Source Clean-Room Reimplementation (HTML5 Canvas & WebAudio).", 6 * sx, H - footFont - 4);
     ctx.fillText(
-      "You may freely distribute this game so long as it's not sold for profit without the author's written consent.",
+      "An independent tribute inspired by classic 1990s Amiga & PC brick-breaker games.",
       6 * sx,
       H - 2
     );
@@ -1344,8 +1345,8 @@ export class GameEngine {
   }
 
   // ============================================================================
-  // AUTHENTIC DX-BALL 1.09 INTRO / CREDITS SPLASH SCREEN (State 4: DXBall1-3.png)
-  // Reconstructed from Intro.pcx, FUN_0040a0b0, FUN_0040a510, FUN_0040a850 & FUN_0040a6c0
+  // BRICKWORK INTRO / CREDITS SPLASH SCREEN
+  // Oscillating raster bars, outlined logo, and sine-wave 3D beveled scroller
   // ============================================================================
   private renderIntroScreen() {
     const ctx = this.ctx;
@@ -1356,7 +1357,7 @@ export class GameEngine {
 
     ctx.save();
 
-    // 1. Oscillating Raster Bars (FUN_0040a850)
+    // 1. Oscillating Raster Bars
     const waveOffset = Math.sin(this.animPhase * 3.2) * 8 * sy;
 
     // Top Gold/Orange Raster Bar
@@ -1368,17 +1369,17 @@ export class GameEngine {
     ctx.fillStyle = gBar1;
     ctx.fillRect(0, bar1Y, W, 16 * sy);
 
-    // 2. Large Outlined "DX·BALL" Logo (Intro.pcx top half)
+    // 2. Large Outlined "BRICKWORK" Logo
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    const logoFont = Math.round(92 * sx);
+    const logoFont = Math.round(76 * sx);
     ctx.font = `900 ${logoFont}px 'Arial Black', 'Impact', sans-serif`;
     ctx.lineWidth = Math.max(3, 4 * sx);
     ctx.strokeStyle = "#b8d8e8";
-    ctx.strokeText("DX·BALL", W / 2, 72 * sy);
+    ctx.strokeText("BRICK·WORK", W / 2, 72 * sy);
     ctx.lineWidth = 1.5;
     ctx.strokeStyle = "#ffffff";
-    ctx.strokeText("DX·BALL", W / 2, 72 * sy);
+    ctx.strokeText("BRICK·WORK", W / 2, 72 * sy);
 
     // Lower Green/Blue Raster Bar
     const bar2Y = 128 * sy - waveOffset;
@@ -1390,7 +1391,7 @@ export class GameEngine {
     ctx.fillStyle = gBar2;
     ctx.fillRect(0, bar2Y, W, 16 * sy);
 
-    // 3. Red Gradient Band: VIDEO CARD: HARDWARE ACCELERATION FOUND AND SUPPORTED
+    // 3. Red Gradient Band: HTML5 CANVAS + WEBAUDIO ACCELERATION
     const redBandY = 165 * sy;
     const gRed = ctx.createLinearGradient(0, redBandY, 0, redBandY + 58 * sy);
     gRed.addColorStop(0, "#220000");
@@ -1414,13 +1415,13 @@ export class GameEngine {
       ctx.restore();
     };
 
-    drawCandyText("VIDEO CARD:  HARDWARE ACCELERATION FOUND", 20 * sx, redBandY + 22 * sy);
-    drawCandyText("AND SUPPORTED", 300 * sx, redBandY + 44 * sy, "center");
+    drawCandyText("VIDEO ENGINE: HTML5 CANVAS ACCELERATION FOUND", 20 * sx, redBandY + 22 * sy);
+    drawCandyText("AND SUPPORTED", 320 * sx, redBandY + 44 * sy, "center");
 
-    // 4. Author & 3D GFX Credits
-    drawCandyText("AUTHOR:      MICHAEL P. WELCH", 20 * sx, 245 * sy);
-    drawCandyText("3D GFX:      SEUMAS McNALLY", 20 * sx, 268 * sy);
-    drawCandyText("E-MAIL:      MWELCH1@STNY.LRUN.COM", 20 * sx, 304 * sy);
+    // 4. Clean-Room Project & Engine Details
+    drawCandyText("PROJECT:     BRICKWORK ARCADE", 20 * sx, 245 * sy);
+    drawCandyText("ENGINE:      CLEAN-ROOM TYPESCRIPT & WEBAUDIO", 20 * sx, 268 * sy);
+    drawCandyText("VIEW MODES:  CLASSIC 4:3 + MOBILE FULLSCREEN", 20 * sx, 304 * sy);
 
     // 5. Blue Gradient Band
     const blueBandY = 330 * sy;
@@ -1431,10 +1432,10 @@ export class GameEngine {
     ctx.fillStyle = gBlue;
     ctx.fillRect(0, blueBandY, W, 60 * sy);
 
-    drawCandyText("VISIT  HTTP://HOME.STNY.LRUN.COM/SCORCHED/", W / 2, blueBandY + 12 * sy, "center");
-    drawCandyText("FOR FREE BOARD EDITOR PLUS HINTS AND TIPS", W / 2, blueBandY + 34 * sy, "center");
+    drawCandyText("INCLUDES 50 CAMPAIGN BOARDS + 20X20 LEVEL EDITOR", W / 2, blueBandY + 12 * sy, "center");
+    drawCandyText("18 POWER-UP TILES WITH PARABOLIC GRAVITY PHYSICS", W / 2, blueBandY + 34 * sy, "center");
 
-    // 6. Sine-Wave Scrolling Purple Beveled 3D Text (FUN_0040a6c0 + Chisel2.sbk)
+    // 6. Sine-Wave Scrolling Purple Beveled 3D Text
     const scrollerBaseY = 435 * sy;
     ctx.font = `900 ${Math.max(18, Math.round(28 * sx))}px 'Impact', 'Arial Black', sans-serif`;
     const charStep = 18 * sx;
