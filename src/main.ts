@@ -1,6 +1,7 @@
 import { GameEngine } from "./game/engine.ts";
 
 const stage = document.getElementById("stage") as HTMLCanvasElement;
+const topNav = document.getElementById("top-nav") as HTMLDivElement;
 const fsBtn = document.getElementById("fs-btn") as HTMLButtonElement;
 const btnHome = document.getElementById("btn-home") as HTMLButtonElement;
 const modeToggle = document.getElementById("mode-toggle") as HTMLButtonElement;
@@ -45,10 +46,16 @@ game.state = "mode_select"; // Always start at the interactive Home Menu!
 game.start();
 
 function updateNavState() {
+  if (topNav) {
+    // Hide the floating HTML top-nav while on the main Start Screen (which has its own interactive canvas buttons)
+    topNav.style.display = game.state === "mode_select" ? "none" : "flex";
+  }
   if (btnPlayCustom) {
     btnPlayCustom.style.display = game.state === "editor" ? "inline-block" : "none";
   }
 }
+updateNavState();
+setInterval(updateNavState, 150);
 
 btnHome?.addEventListener("click", () => {
   game.state = "mode_select";
@@ -85,6 +92,9 @@ btnScores?.addEventListener("click", () => {
 window.addEventListener("pointerdown", () => {
   setTimeout(updateNavState, 50);
 });
+window.addEventListener("touchstart", () => {
+  setTimeout(updateNavState, 50);
+}, { passive: true });
 window.addEventListener("keydown", () => {
   setTimeout(updateNavState, 50);
 });
@@ -125,7 +135,7 @@ function showFullscreenHelp() {
 }
 
 // Fullscreen Handling
-fsBtn?.addEventListener("click", async () => {
+async function triggerFullscreen() {
   if (deferredInstallPrompt) {
     void deferredInstallPrompt.prompt();
     deferredInstallPrompt = null;
@@ -149,6 +159,14 @@ fsBtn?.addEventListener("click", async () => {
   } else {
     showFullscreenHelp();
   }
+}
+
+game.onFullscreenRequest = () => {
+  void triggerFullscreen();
+};
+
+fsBtn?.addEventListener("click", () => {
+  void triggerFullscreen();
 });
 
 closeFsModal?.addEventListener("click", () => {

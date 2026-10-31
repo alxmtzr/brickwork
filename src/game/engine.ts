@@ -42,6 +42,8 @@ export class GameEngine {
 
   public viewMode: ViewMode = "classic";
   public onModeChange?: (mode: ViewMode) => void;
+  public onStateChange?: (state: string) => void;
+  public onFullscreenRequest?: () => void;
 
   // Dynamic stage bounds (in classic: 640x480 fixed; in modern: dynamic vertical portrait/fullscreen aspect)
   public virtualW = STAGE_W;
@@ -341,34 +343,41 @@ export class GameEngine {
     const isModern = this.viewMode === "modern" && this.virtualH > this.virtualW;
 
     if (isModern) {
-      const btnW = Math.min(this.virtualW * 0.44, 200);
-      const btnH = Math.max(36, Math.round(this.virtualH * 0.052));
-      const gap = 10;
-      const rowY = this.virtualH * 0.305;
-      const subY = rowY + btnH + 8;
-      const subW = (btnW * 2 + gap - 16) / 3;
-      const subH = Math.max(28, Math.round(btnH * 0.78));
-      const leftX = this.virtualW / 2 - btnW - gap / 2;
+      const u = this.virtualW / 390;
+      const totalW = this.virtualW * 0.90;
+      const leftX = (this.virtualW - totalW) / 2;
+      const gap = 10 * u;
+      const btnW = (totalW - gap) / 2;
+      const btnH = 40 * u;
+      const boxY = 32 * u;
+      const boxH = 68 * u;
+      const rowY = boxY + boxH + 68 * u;
+      const subY = rowY + btnH + 8 * u;
+      const subGap = 8 * u;
+      const subW = (totalW - subGap * 3) / 4;
+      const subH = 30 * u;
       return {
         classicBtn: { x: leftX, y: rowY, w: btnW, h: btnH },
-        modernBtn: { x: this.virtualW / 2 + gap / 2, y: rowY, w: btnW, h: btnH },
+        modernBtn: { x: leftX + btnW + gap, y: rowY, w: btnW, h: btnH },
         introBtn: { x: leftX, y: subY, w: subW, h: subH },
-        scoresBtn: { x: leftX + subW + 8, y: subY, w: subW, h: subH },
-        editorBtn: { x: leftX + (subW + 8) * 2, y: subY, w: subW, h: subH },
+        scoresBtn: { x: leftX + (subW + subGap), y: subY, w: subW, h: subH },
+        editorBtn: { x: leftX + (subW + subGap) * 2, y: subY, w: subW, h: subH },
+        fullscreenBtn: { x: leftX + (subW + subGap) * 3, y: subY, w: subW, h: subH },
       };
     }
 
-    // Classic 640x480 layout: placed cleanly on the right side between "BY ED AND AL MACKEY" and the Boing Ball,
-    // plus full-screen click fallback so clicking anywhere on the start screen starts the game just like DX-Ball!
     const rightPanelX = 432 * s;
     const btnW = 188 * s;
     const btnH = 28 * s;
+    const subGap = 4 * s;
+    const subW = (btnW - subGap * 3) / 4;
     return {
       classicBtn: { x: rightPanelX, y: 156 * s, w: btnW, h: btnH },
       modernBtn: { x: rightPanelX, y: 190 * s, w: btnW, h: btnH },
-      introBtn: { x: rightPanelX, y: 224 * s, w: 58 * s, h: 22 * s },
-      scoresBtn: { x: rightPanelX + 63 * s, y: 224 * s, w: 62 * s, h: 22 * s },
-      editorBtn: { x: rightPanelX + 130 * s, y: 224 * s, w: 58 * s, h: 22 * s },
+      introBtn: { x: rightPanelX, y: 224 * s, w: subW, h: 22 * s },
+      scoresBtn: { x: rightPanelX + (subW + subGap), y: 224 * s, w: subW, h: 22 * s },
+      editorBtn: { x: rightPanelX + (subW + subGap) * 2, y: 224 * s, w: subW, h: 22 * s },
+      fullscreenBtn: { x: rightPanelX + (subW + subGap) * 3, y: 224 * s, w: subW, h: 22 * s },
     };
   }
 
@@ -422,7 +431,11 @@ export class GameEngine {
           this.editorGrid = new Array(BOARD_COLS * BOARD_ROWS).fill(0);
           return;
         }
-        // In original DX-Ball, clicking anywhere on the Main Menu starts the game!
+        if (inRect(pos, rects.fullscreenBtn)) {
+          this.onFullscreenRequest?.();
+          return;
+        }
+        // Clicking anywhere else on the Main Menu starts the game
         this.startWithMode(this.viewMode);
         return;
       }
@@ -1129,24 +1142,26 @@ export class GameEngine {
     const isModernPortrait = this.viewMode === "modern" && H > W;
     const sx = W / STAGE_W;
     const sy = H / STAGE_H;
+    const u = isModernPortrait ? W / 390 : sx;
 
     ctx.save();
 
     // 1. Top Status Line: "Last Score - <N>" (left) and "V 1.0" (right)
-    const topY = isModernPortrait ? Math.max(44, H * 0.055) : 14 * sy;
-    ctx.font = `bold ${Math.max(11, Math.round(12 * sx))}px 'Courier New', monospace`;
+    const topY = isModernPortrait ? 10 * u : 14 * sy;
+    const padX = isModernPortrait ? W * 0.05 : 8 * sx;
+    ctx.font = `bold ${Math.max(11, Math.round(12 * u))}px 'Courier New', monospace`;
     ctx.fillStyle = "#d8e0f0";
     ctx.textBaseline = "top";
     ctx.textAlign = "left";
-    ctx.fillText(`Last Score - ${this.lastScore}`, 8 * sx, topY);
+    ctx.fillText(`Last Score - ${this.lastScore}`, padX, topY);
     ctx.textAlign = "right";
-    ctx.fillText("V 1.0", W - 8 * sx, topY);
+    ctx.fillText("V 1.0", W - padX, topY);
 
     // 2. Top Cyan Box & Side Spotlights
-    const boxW = isModernPortrait ? W * 0.88 : 440 * sx;
-    const boxH = isModernPortrait ? Math.max(66, H * 0.095) : 80 * sy;
+    const boxW = isModernPortrait ? W * 0.90 : 440 * sx;
+    const boxH = isModernPortrait ? 68 * u : 80 * sy;
     const boxX = (W - boxW) / 2;
-    const boxY = isModernPortrait ? topY + 20 : 35 * sy;
+    const boxY = isModernPortrait ? 32 * u : 35 * sy;
 
     // Left Spotlight
     const spotR = boxH * 0.68;
@@ -1173,25 +1188,26 @@ export class GameEngine {
     ctx.fillStyle = "#000000";
     ctx.fillRect(boxX, boxY, boxW, boxH);
     ctx.strokeStyle = "#00b8b8";
-    ctx.lineWidth = Math.max(4, 5 * sx);
+    ctx.lineWidth = Math.max(3, 4.5 * u);
     ctx.strokeRect(boxX, boxY, boxW, boxH);
     ctx.strokeStyle = "#40ffff";
-    ctx.lineWidth = 1.5;
+    ctx.lineWidth = Math.max(1, 1.5 * u);
     ctx.strokeRect(boxX - 1, boxY - 1, boxW + 2, boxH + 2);
 
     // 3. Inside Cyan Box: The 46x7 Orbiting Ball Dot-Matrix spelling "BRICKWORK"
     const cols = BRICKWORK_DOT_COLS;
     const rows = BRICKWORK_DOT_ROWS;
-    const cellStepX = (boxW - 16 * sx) / cols;
-    const cellStepY = (boxH - 12 * sy) / rows;
-    const startX = boxX + 8 * sx + cellStepX / 2;
-    const startY = boxY + 6 * sy + cellStepY / 2;
-    const ballR = Math.max(2.4, Math.min(cellStepX, cellStepY) * 0.46);
+    const cellStepX = (boxW - 14 * u) / cols;
+    const cellStepY = (boxH - 10 * u) / rows;
+    const startX = boxX + 7 * u + cellStepX / 2;
+    const startY = boxY + 5 * u + cellStepY / 2;
+    const ballR = Math.max(2.2, Math.min(cellStepX, cellStepY) * 0.46);
     const orbitRx = cellStepX * 0.38;
     const orbitRy = cellStepY * 0.32;
 
     // Pass 1: Background orbiting dots (where matrix == 0)
     ctx.fillStyle = "#489898";
+    const dotSize = Math.max(1.5, 1.5 * u);
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         const val = BRICKWORK_DOT_MATRIX[r * cols + c];
@@ -1200,7 +1216,7 @@ export class GameEngine {
           const rad = (deg * Math.PI) / 180;
           const px = startX + c * cellStepX + Math.cos(rad) * orbitRx;
           const py = startY + r * cellStepY + Math.sin(rad) * orbitRy;
-          ctx.fillRect(px, py, 1.5, 1.5);
+          ctx.fillRect(px, py, dotSize, dotSize);
         }
       }
     }
@@ -1213,7 +1229,7 @@ export class GameEngine {
           const deg = (this.matrixAngleDeg + c * 20 + r * 35 + 30) % 360;
           const rad = (deg * Math.PI) / 180;
           const px = startX + c * cellStepX + Math.cos(rad) * orbitRx;
-          const py = startY + r * cellStepY + Math.sin(rad) * orbitRy - 2 * sy;
+          const py = startY + r * cellStepY + Math.sin(rad) * orbitRy - 1.5 * u;
 
           const bg = ctx.createRadialGradient(px - ballR * 0.35, py - ballR * 0.35, ballR * 0.1, px, py, ballR);
           bg.addColorStop(0, "#ffffff");
@@ -1228,41 +1244,44 @@ export class GameEngine {
     }
 
     // 4. Subtitle below right of cyan box
-    ctx.font = `bold ${Math.max(10, Math.round(12 * sx))}px 'Courier New', monospace`;
+    ctx.font = `bold ${Math.max(10, Math.round(11 * u))}px 'Courier New', monospace`;
     ctx.fillStyle = "#b8c8e0";
     ctx.textAlign = "right";
-    ctx.fillText("Clean-Room Web Edition", boxX + boxW, boxY + boxH + 8 * sy);
+    ctx.fillText("Clean-Room Web Edition", boxX + boxW, boxY + boxH + 6 * u);
 
     // 5. Center Tribute Banner
-    const midY1 = isModernPortrait ? boxY + boxH + 26 : 196 * sy;
-    const midY2 = isModernPortrait ? midY1 + 22 : 226 * sy;
+    const midY1 = isModernPortrait ? boxY + boxH + 24 * u : 196 * sy;
+    const midY2 = isModernPortrait ? midY1 + 20 * u : 226 * sy;
     ctx.textAlign = "center";
-    ctx.font = `900 ${Math.max(14, Math.round(19 * sx))}px 'Impact', 'Arial Black', monospace`;
-    const goldGrad = ctx.createLinearGradient(0, midY1 - 10, 0, midY2 + 15);
+    ctx.font = `900 ${Math.max(14, Math.round(18 * u))}px 'Impact', 'Arial Black', sans-serif`;
+    const goldGrad = ctx.createLinearGradient(0, midY1 - 10 * u, 0, midY2 + 15 * u);
     goldGrad.addColorStop(0, "#ffff66");
     goldGrad.addColorStop(0.5, "#ff9900");
     goldGrad.addColorStop(1, "#aa4400");
     ctx.fillStyle = goldGrad;
-    const creditCenterX = isModernPortrait ? W / 2 : 230 * sx;
+    const creditCenterX = isModernPortrait ? W * 0.44 : 230 * sx;
     ctx.fillText("90S ARCADE BRICK-BREAKER", creditCenterX, midY1);
     ctx.fillText("CLASSIC & MOBILE EDITION", creditCenterX, midY2);
 
     // 6. Interactive Mode / Action Buttons
     const rects = this.getMenuButtonRects();
-    this.drawRetroButton(rects.classicBtn, "▶ PLAY CLASSIC (4:3)", this.viewMode === "classic" ? "#00ccff" : "#557799", this.viewMode === "classic");
-    this.drawRetroButton(rects.modernBtn, "▶ PLAY MODERN (MOBILE)", this.viewMode === "modern" ? "#00ff88" : "#557799", this.viewMode === "modern");
+    this.drawRetroButton(rects.classicBtn, "▶ CLASSIC (4:3)", this.viewMode === "classic" ? "#00ccff" : "#557799", this.viewMode === "classic");
+    this.drawRetroButton(rects.modernBtn, "▶ MODERN (MOBILE)", this.viewMode === "modern" ? "#00ff88" : "#557799", this.viewMode === "modern");
     this.drawRetroButton(rects.introBtn, "INTRO", "#aa88ff", false);
     this.drawRetroButton(rects.scoresBtn, "SCORES", "#ffaa00", false);
     this.drawRetroButton(rects.editorBtn, "EDITOR", "#00e0ff", false);
+    this.drawRetroButton(rects.fullscreenBtn, "⛶ FULL", "#44ffaa", false);
 
     // 7. Bottom-Left 3 Columns x 6 Rows Power-Up Legend (All 18 Power-Ups)
-    const legendTopY = isModernPortrait ? rects.introBtn.y + rects.introBtn.h + 14 : 264 * sy;
-    const legendBottomY = H - (isModernPortrait ? 44 : 28 * sy);
+    const legendTopY = isModernPortrait ? rects.introBtn.y + rects.introBtn.h + 14 * u : 264 * sy;
+    const legendBottomY = H - (isModernPortrait ? 32 * u : 28 * sy);
     const availLegendH = legendBottomY - legendTopY;
     const rowStep = availLegendH / 6;
-    const tileSize = Math.min(isModernPortrait ? 26 : 31 * sx, rowStep * 0.86);
+    const tileSize = isModernPortrait
+      ? Math.min(30 * u, rowStep * 0.78)
+      : Math.min(31 * sx, rowStep * 0.86);
     const colPositions = isModernPortrait
-      ? [W * 0.04, W * 0.36, W * 0.68]
+      ? [W * 0.05, W * 0.37, W * 0.69]
       : [34 * sx, 158 * sx, 280 * sx];
 
     for (let colIdx = 0; colIdx < 3; colIdx++) {
@@ -1271,42 +1290,44 @@ export class GameEngine {
       for (let rowIdx = 0; rowIdx < 6; rowIdx++) {
         const pId = colIds[rowIdx]!;
         const def = POWERUP_DEFS[pId]!;
-        const ty = legendTopY + rowIdx * rowStep;
+        const ty = legendTopY + rowIdx * rowStep + (rowStep - tileSize) * 0.5;
 
         this.renderPowerupTile(colX, ty, tileSize, pId);
 
         ctx.textAlign = "left";
-        ctx.textBaseline = "top";
+        ctx.textBaseline = "middle";
         ctx.fillStyle = "#e8f0ff";
-        const fontSize = Math.max(9, Math.min(12, Math.round(tileSize * 0.38)));
+        const fontSize = Math.max(Math.round(9 * u), Math.min(Math.round(11.5 * u), Math.round(tileSize * 0.36)));
         ctx.font = `bold ${fontSize}px 'Courier New', system-ui, sans-serif`;
+        const textX = colX + tileSize + 5 * u;
         if (def.line2) {
-          ctx.fillText(def.line1, colX + tileSize + 6 * sx, ty + 1);
-          ctx.fillText(def.line2, colX + tileSize + 6 * sx, ty + fontSize + 2);
+          ctx.fillText(def.line1, textX, ty + tileSize * 0.32);
+          ctx.fillText(def.line2, textX, ty + tileSize * 0.70);
         } else {
-          ctx.fillText(def.line1, colX + tileSize + 6 * sx, ty + tileSize * 0.28);
+          ctx.fillText(def.line1, textX, ty + tileSize * 0.50);
         }
       }
     }
 
-    // 8. Bottom-Right Red & White Checkered 3D Sphere
+    // 8. Red & White Checkered 3D Sphere
     if (!isModernPortrait) {
       this.renderBoingBall(566 * sx, 384 * sy, 66 * Math.min(sx, sy));
     } else {
-      this.renderBoingBall(W - 36, midY1 + 8, 24);
+      this.renderBoingBall(W * 0.86, midY1 + 18 * u, 22 * u);
     }
 
     // 9. Bottom Clean-Room Attribution Footer
-    ctx.textAlign = "left";
+    ctx.textAlign = isModernPortrait ? "center" : "left";
     ctx.textBaseline = "bottom";
     ctx.fillStyle = "#8899b0";
-    const footFont = Math.max(8, Math.round(10 * sx));
+    const footFont = Math.max(8, Math.round((isModernPortrait ? 8.5 : 10) * u));
     ctx.font = `${footFont}px 'Courier New', monospace`;
-    ctx.fillText("Brickwork — Open-Source Clean-Room Reimplementation (HTML5 Canvas & WebAudio).", 6 * sx, H - footFont - 4);
+    const footX = isModernPortrait ? W / 2 : 6 * sx;
+    ctx.fillText("Brickwork — Open-Source Clean-Room Reimplementation (HTML5 Canvas & WebAudio).", footX, H - footFont - 4 * u);
     ctx.fillText(
       "An independent tribute inspired by classic 1990s Amiga & PC brick-breaker games.",
-      6 * sx,
-      H - 2
+      footX,
+      H - 2 * u
     );
 
     ctx.restore();
@@ -1333,11 +1354,18 @@ export class GameEngine {
     ctx.roundRect(r.x, r.y, r.w, r.h, 5);
     ctx.fill();
     ctx.strokeStyle = accent;
-    ctx.lineWidth = active ? 2 : 1;
+    ctx.lineWidth = active ? 2 : 1.2;
     ctx.stroke();
 
     ctx.fillStyle = active ? "#ffffff" : "#cce0f5";
-    ctx.font = `bold ${Math.max(10, Math.round(r.h * 0.44))}px 'Courier New', system-ui, sans-serif`;
+    let fontSize = Math.max(10, Math.round(r.h * 0.38));
+    ctx.font = `bold ${fontSize}px 'Courier New', system-ui, sans-serif`;
+    const maxTextW = r.w - 10;
+    const measuredW = ctx.measureText(label).width;
+    if (measuredW > maxTextW && measuredW > 0) {
+      fontSize = Math.max(8, Math.floor(fontSize * (maxTextW / measuredW)));
+      ctx.font = `bold ${fontSize}px 'Courier New', system-ui, sans-serif`;
+    }
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(label, r.x + r.w / 2, r.y + r.h / 2);
